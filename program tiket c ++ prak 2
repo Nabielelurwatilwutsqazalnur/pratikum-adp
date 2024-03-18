@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    
+    string padang = "Padang", bukittinggi = "Bukittinggi", solok = "Solok", ampang = "Ampang", lubay = "Lubay", lumin = "Lumin";
+    
+    string ekonomi = "Ekonomi", bisnis = "Bisnis", first = "First" ;
+    
+    string tujuan, kelas; 
+    float x, y, j, diskon, t, tx, txc ; 
+    
+    
+    cout <<"Program tiket bus ANS\nNabiel El Urwatilwutsqa Zalnur \nNIM : 2310432025 \nsift 2 \n\n" ;
+    
+    
+    
+    cout << "Bus PT ANS Lintas Sumatra\n=========================\nPadang      : Rp 10.000\nBukittinggi : Rp 15.000\nSolok       : Rp 25.000\nAmpang      : Rp 20.000\nlubay       : Rp 10.000\nlumin       : Rp 15.000\n";
+    
+    cout << "\nPilih tujuan : ";
+    cin >> tujuan;
+    
+    if (tujuan == padang) { x = 10000 ;  }
+    else if (tujuan == bukittinggi) { x = 15000; }
+    else if (tujuan == solok) {x = 25000 ; }
+    else if (tujuan == ampang) { x = 20000 ; }
+    
+    else if (tujuan == lubay) {x = 10000 ; }
+    
+    else if (tujuan == lumin) { x = 15000 ; }
+    
+    else {cout << "\nMaaf tujuan tidak ada, silahkan pilih tujuan yang tersedia\n" ; return 0 ; }
+    
+    
+    cout << "\nClass yang tersedia:\n====================\nEkonomi : Rp 10.000\nBisnis  : Rp 20.000\nFirst   : Rp 30.000\n";
+    
+    cout << "\nPilih Class : " ;
+    cin >> kelas ; 
+    
+    
+     if (kelas == ekonomi) {y = 10000 ; }
+    else if (kelas == bisnis) {y = 20000 ;}
+    else if (kelas == first ) {y = 30000 ; }
+    else {cout << "\nMaaf class  yang anda maksud tidak ada, silahkan pilih class yang tersedia\n" ; return 0 ; }
+    
+     cout << "\nJumlah tiket : " ;
+     cin >> j ; 
+     
+      if (3 <= j && j <=5) { diskon = 0.05 ; } 
+    else if  (j > 5 ) { diskon = 0.1 ; }
+    else {diskon = 0 ; }
+    
+    
+     t = (x + y ) * j ; 
+     tx = t  * diskon ;
+     txc = t - tx ; 
+     
+     cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" ;
+     cout << "\nTujuan                  : " << tujuan ;
+     cout << "\nClass                   : " << kelas ;
+     cout << "\nTotal                   : Rp " << t ;
+     cout << "\nDiskon                  : Rp " << tx ;
+     cout << "\nTotal setelah di diskon : Rp " << txc ; 
+       
+    return 0;
+}
