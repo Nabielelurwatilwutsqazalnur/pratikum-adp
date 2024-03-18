@@ -1,0 +1,67 @@
+padang = "Padang"
+bukittinggi = "Bukittinggi"
+solok = "Solok"
+ampang = "Ampang"
+lubay = "Lubay"
+lumin = "Lumin"
+
+ekonomi = "Ekonomi"
+bisnis = "Bisnis"
+first = "First"
+
+print("Program Tiket Bus ANS\nNabiel El Urwatilwutsqa Zalnur \nNIM : 2310432025 \nsift 2 \n\n")
+print("Bus PT ANS Lintas Sumatra\n=========================\nPadang      : Rp 10.000\nBukittinggi : Rp 15.000\nSolok       : Rp 25.000\nAmpang      : Rp 20.000\nlubay       : Rp 10.000\nlumin       : Rp 15.000\n")
+
+tujuan = input("Pilih tujuan: ")
+if tujuan == padang:
+    harga_tujuan = 10000
+elif tujuan == bukittinggi:
+    harga_tujuan = 15000
+elif tujuan == solok:
+    harga_tujuan = 25000
+elif tujuan == ampang:
+    harga_tujuan = 20000
+elif tujuan == lubay:
+    harga_tujuan = 10000
+elif tujuan == lumin:
+    harga_tujuan = 15000
+else:
+    print("\nMaaf tujuan tidak ada, silahkan pilih tujuan yang tersedia\n")
+    exit()
+
+print("\nClass yang tersedia:\n====================\nEkonomi : Rp 10.000\nBisnis  : Rp 20.000\nFirst   : Rp 30.000\n")
+
+kelas = input("Pilih Class: ")
+if kelas == ekonomi:
+    biaya_kelas = 10000
+elif kelas == bisnis:
+    biaya_kelas = 20000
+elif kelas == first:
+    biaya_kelas = 30000
+else:
+    print("\nMaaf class yang anda maksud tidak ada, silahkan pilih class yang tersedia\n")
+    exit()
+
+jumlah_tiket = int(input("\nJumlah tiket: "))
+if jumlah_tiket < 0:
+    print("\nJumlah tiket tidak valid\n")
+    exit()
+
+if jumlah_tiket >= 3:
+    if jumlah_tiket < 5:
+        diskon = 0.05
+    else:
+        diskon = 0.1
+else:
+    diskon = 0
+
+total = (harga_tujuan + biaya_kelas) * jumlah_tiket
+diskon_total = total * diskon
+total_diskon = total - diskon_total
+
+print("\n~\n")
+print("\nTujuan                  : " + tujuan)
+print("\nClass                   : " + kelas)
+print("\nTotal                   : Rp " + str(total))
+print("\nDiskon                  : Rp " + str(diskon_total))
+print("\nTotal setelah di diskon : Rp " + str(total_diskon))
