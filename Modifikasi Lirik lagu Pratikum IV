@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string lyrics;
+     cout << "Program Modifikasi lirik lagu\nNabiel El Urwatilwutsqa Zalnur \nNIM : 2310432025 \nShift 2 \n\n";
+     
+    cout << "Masukkan lirik lagu: ";
+    getline(cin, lyrics);
+    
+   
+    
+     for (int i = 0; i < lyrics.length(); i++) {
+        lyrics[i] = tolower(lyrics[i]);}
+    
+    
+    
+    for (int i = 0; i < lyrics.length(); i++) {
+        char q = lyrics[i];
+        if (q == 'a' || q == 'e' || q == 'o' || q == 'u') {
+            lyrics[i] = 'i';}}
+   
+    
+   
+
+    cout << "\nHasil setelah mengganti huruf vokal menjadi 't': " << lyrics << endl;
+
+    return 0;
+}
