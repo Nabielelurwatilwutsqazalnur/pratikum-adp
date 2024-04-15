@@ -1,0 +1,38 @@
+import math
+
+print("Program Array\nNabiel El Urwatilwutsqa Zalnur\nNIM : 2310432025\nShift 2\n\n")
+
+print("Tabel Fungsi\n"
+      "f(x) = 3x²+7x-2,   jika x > 0\n"
+      "     = 2x²-5x-4, jika x ≤ 0\n"
+      "g(x) = (f(x))² - √(f(x))\n"
+      "h(x) = f(x) * g(x)\n")
+
+ulang = 'Y'
+while ulang == 'Y':
+    print("_______________________________________________________\n")
+    n = int(input("Masukkan banyak data = "))
+    xoxo = []
+
+    print("Masukkan nilai x:")
+    for i in range(n):
+        nilai_x = int(input(f"nilai x ke {i + 1} = "))
+        xoxo.append(nilai_x)
+
+    print("\n-------------------------------------------------------")
+    print("No", "x".rjust(10), "f(x)".rjust(10), "g(x)".rjust(10), "h(x)".rjust(10))
+    print("-------------------------------------------------------")
+
+    for i in range(n):
+        if xoxo[i] > 0:
+            a = 3 * xoxo[i] * xoxo[i] + 7 * xoxo[i] - 2
+            g = a * a - math.sqrt(a)
+        else:
+            a = 2 * xoxo[i] * xoxo[i] - 5 * xoxo[i] - 4
+            g = a * a - math.sqrt(a)
+        k = a * g
+
+        print(f"{i + 1}", str(xoxo[i]).rjust(10), str(a).rjust(10), str(g).rjust(10), str(k).rjust(10))
+
+    ulang = input("\napakah ingin mengulang program?\n\n[ Y/N ] : ").upper()
+
