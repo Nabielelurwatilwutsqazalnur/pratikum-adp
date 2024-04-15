@@ -1,0 +1,60 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int n;
+    
+    cout << "Program Array\nNabiel El Urwatilwutsqa Zalnur \nNIM : 2310432025 \nShift 2 \n\n";
+    
+    cout << "Tabel Fungsi\n" <<
+    "f(x) = 3x²+7x-2,   jika x > 0\n" <<
+    "     = 2x²-5x-4, jika x ≤ 0\n" <<
+    "g(x) = (f(x))² - √(f(x))\n" <<
+    "h(x) = f(x) * g(x)\n" ; 
+    
+    
+    char ulang= 'Y' ; 
+    while (ulang == 'Y') {
+    cout << "_______________________________________________________ \n" ; 
+    cout << "\nMasukkan banyak data =  ";
+    cin >> n;
+    int xoxo[n];
+
+    cout << "Masukkan nilai x:\n";
+    
+    for (int i = 0; i < n; ++i) {
+        cout << "nilai x ke " << i + 1 << " = ";
+        cin >> xoxo[i];
+    }
+    
+
+   cout << "\n-------------------------------------------------------\n";
+    cout << "No" << setw(13) << "x" << setw(13) << "f(x)" << setw(13) << "g(x)" << setw(13) << "h(x)" << endl;
+    cout << "-------------------------------------------------------\n";
+    
+    for (int i = 0; i < n; ++i) {
+        float a, g, k;
+        
+        
+        if (xoxo[i] > 0) {
+            a = 3 * xoxo[i] * xoxo[i] + 7 * xoxo[i] - 2;
+            g = a * a - sqrt(a);
+        } else {
+            a = 2 * xoxo[i] * xoxo[i] - 5 * xoxo[i] - 4;
+            g = a * a - sqrt(a);
+        }
+        k = a * g;
+
+        cout << i + 1 << setw(14) << xoxo[i] << setw(13) << a << setw(13) << g << setw(13) << k << endl;
+    }
+
+     
+
+    cout << "\napakah ingin mengulang program?\n" ; 
+    cout << "\n[ Y/N ] : " ; cin >> ulang ; 
+    }
+
+    return 0;
+}
