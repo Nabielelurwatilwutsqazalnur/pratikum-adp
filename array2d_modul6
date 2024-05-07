@@ -1,0 +1,51 @@
+x = [[], []]  
+bm = int(input("Banyak mahasiswa: "))
+bk = int(input("Banyak mata kuliah: ")) 
+
+print("_____________________________________\n")
+
+k = []
+for i in range(bk):
+    k.append(input("Masukkan nama mata kuliah ke-%d: " % (i+1)))
+
+print("_____________________________________\n")
+m = []
+for i in range(bm):
+    m.append(input("Masukkan nama mahahasiswa ke-%d: " % (i+1)))
+
+
+for i in range(bm):
+    print("\n# Masukkan data untuk %s" % m[i])
+    n = []
+    for j in range(bk):
+        nilai = float(input("- Masukkan nilai untuk mata kuliah %s: " % k[j]))
+        n.append(nilai)
+    x[0].append(m[i])
+    x[1].append(n)
+
+
+print("\nmatriks:")
+print("{:<20}".format(""), end="")
+for sub in k:
+    print("{:<20}".format(sub), end="")
+print()
+for i in range(bm):
+    print("{:<20}".format(x[0][i]), end="")
+    for j in range(bk):
+        print("{:<20}".format(x[1][i][j]), end="")
+    print()
+
+
+print("\nNilai tertinggi untuk setiap mata kuliah:")
+for i in range(bk):
+    tertinggi = -1
+    mtertinggi = []
+    for j in range(bm):
+        nilai = x[1][j][i]
+        if nilai > tertinggi:
+            tertinggi = nilai
+            mtertinggi = [x[0][j]]
+        elif nilai == tertinggi and x[0][j] not in mtertinggi:
+            mtertinggi.append(x[0][j])
+    for mm in mtertinggi:
+        print("@ Mata Kuliah: {} \n   Nilai Tertinggi: {} \n   Nama Mahasiswa: {}".format(k[i], tertinggi, mm))
