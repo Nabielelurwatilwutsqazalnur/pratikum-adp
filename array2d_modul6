@@ -1,3 +1,4 @@
+print("Program Pengolahan nilai mahasiswa \nNabiel El Urwatilwutsqa Zalnur \n2310432025 \nShift 2\n")
 x = [[], []]  
 bm = int(input("Banyak mahasiswa: "))
 bk = int(input("Banyak mata kuliah: ")) 
