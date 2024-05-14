@@ -1,0 +1,75 @@
+print("#Konversi suhu# \nNabiel El Urwatilwutsqa Zalnur \n2310432025 \nShift 2\n")
+
+print("konversi satuan suhu yang tersedia\n Celcius/c\n Farenheit/f\n Kelvin/k\n Reamur/r\n")
+x = float(input("masukkan derajat suhu : "))
+y1 = str(input("masukkan satuan : "))
+print("\n__________________________________________\n")
+y = y1.upper()
+
+
+def celcius(x):
+    f = (x * 9/5) + 32 
+    k = x  + 273.15
+    r = 4/5 * x 
+    return f, k, r 
+
+def t(f, k, r) : 
+    print("satuan suhu |      derajat\n------------|------------\nfarenheit   |      {}\nkelvin      |      {}\nreamur      |      {}".format(f, k, r))
+
+def farenheit(x) : 
+    cf = ( x - 32) * 5/9 
+    kf = (x - 32) * 5/9 + 273.15
+    rf = (x-32) * 4/9
+    return cf, kf, rf 
+
+def t1(c, kf, rf) : 
+    print("satuan suhu |      derajat\n------------|------------\ncelcius     |      {}\nkelvin      |      {}\nreamur      |      {}".format(cf, kf, rf))
+
+def kelvin(x) :
+    ck = x - 273.15
+    fk = (x - 273.15) * 9/5 + 32
+    rk = 4/5 * (x - 273.15)
+    return ck, fk, rk 
+
+def t2(ck, fk, rk) : 
+    print("satuan suhu |      derajat\n------------|------------\ncelcius      |      {}\nfarenheit    |      {}\nreamur       |      {}".format(ck, fk, rk))
+
+def reamur(x) : 
+    cr = 5/4 * x 
+    kr = cr + 273.15
+    fr = (9/5 * cr) + 32
+    return cr, kr, fr 
+
+
+def t3(cr, kr, fr) :
+    print("satuan suhu |      derajat\n------------|------------\ncelcius     |      {}\nkelvin      |      {}\nfarenheit   |      {}".format(cr, kr, fr))
+
+
+
+
+if y == "C" or y == "CELCIUS" :
+    if x >= -273.15 :
+        f, k, r = celcius(x) 
+        t(f, k, r) 
+    else :
+        print("besar derajat suhu tidak valid")
+elif  y == "F" or y == "FARENHEIT" :
+    if x >= - 459.67 : 
+        cf, kf, rf = farenheit(x)
+        t1(cf, kf, rf)
+    else :
+        print("besar derajat suhu tidak valid")
+elif y == "K" or y == "KELVIN" :
+    if x >= 0 :
+        ck, fk, rk = kelvin(x)
+        t2(ck, fk, rk)
+    else :
+        print("besar derajat suhu tidak valid")
+elif y == "R" or y == "REAMUR" :
+    if x >= -218.52 :
+        cr, kr, fr = reamur(x)
+        t3(cr, kr, fr) 
+    else :
+        print("besar derajat suhu tidak valid")
+else :
+    print("satuan suhu yang anda masukkan tidak tersedia")
