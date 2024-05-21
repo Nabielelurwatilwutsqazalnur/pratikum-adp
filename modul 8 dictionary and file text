@@ -1,0 +1,100 @@
+print("program data buku \nNabiel El Urwatilwutsqa Zalnur \n2310432025 \nShift 2\n")
+
+
+def b():
+    buku = {}
+    with open('buku.txt', 'r') as file:
+        l = file.readlines()
+        for bar in l:
+            ba = []
+            part = ""
+            for f in bar:
+                if f == '|':
+                    ba.append(part)
+                    part = ""
+                else:
+                    part += f
+            ba.append(part)
+            nomor = 0
+            for nomor in ba:
+                nomor += 1
+            if nomor == 4:
+                judul, penulis, penerbit, terbit = ba 
+                buku[judul] = {
+                    'penulis': penulis,
+                    'penerbit': penerbit,
+                    'tahunterbit': int(terbit)
+                }
+    return buku
+
+def sb(buku):
+    with open('buku.txt', 'w') as file:
+        for key, value in buku.items():
+            baris = f"{key}|{value['penulis']}|{value['penerbit']}|{value['tahunterbit']}\n"
+            file.write(baris)
+
+def tb(buku):
+    if not buku:
+        print("tidak ada buku yang tersimpan")
+    else:
+        print("\nData buku buku:")
+        print("-" * 50)
+        w = 1
+        for key, value in buku.items():
+            print(f"Buku {w}:")
+            print(f"Judul Buku   : {key}")
+            print(f"Nama Penulis : {value['penulis']}")
+            print(f"Nama Penerbit: {value['penerbit']}")
+            print(f"Tahun Terbit : {value['tahunterbit']}")
+            print("-" * 50)
+            w += 1
+    input("\ntekan enter untuk kembali ke menu")
+
+def tab(buku):
+    judul = input("Masukkan judul buku: ")
+    if judul in buku:
+        print("Buku dengan judul tersebut sudah ada")
+        return
+    else :
+        penulis = input("Masukkan nama penulis: ")
+        penerbit = input("Masukkan nama penerbit: ")
+        tterbit = input("Masukkan tahun terbit: ")
+
+    buku[judul] = {
+        'penulis': penulis,
+        'penerbit': penerbit,
+        'tahunterbit': int(tterbit)
+    }
+    sb(buku)
+    print("Data buku berhasil ditambahkan.")
+
+def hb(buku):
+    judulh = input("masukkan judul buku yang akan dihapus: ")
+    if judulh in buku:
+        nb = {}
+        for key, value in buku.items():
+            if key != judulh:
+                nb[key] = value
+        sb(nb)
+        print("data buku telah dihapus.")
+    else:
+        print("Buku dengan judul tersebut tidak ada.")
+
+while True:
+    print("\nMenu:")
+    print("1. tampilkan Data Buku\n2. tambah data buku\n3. hapus data buku\n4. keluar")
+    x = input("Pilih menu (1-4): ")
+
+    buku = b()
+
+    if x == '1':
+        tb(buku)
+    elif x == '2':
+        tab(buku)
+    elif x == '3':
+        hb(buku)
+    elif x == '4':
+        print("program selesai")
+        break
+    else:
+        print("Pilihan tidak valid. Silakan masukkan pilihan yang lain.")
