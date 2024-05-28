@@ -1,0 +1,39 @@
+from termcolor import cprint
+import os
+os.system('cls')
+
+cprint("Program logo visa \nNabiel El Urwatilwutsqa Zalnur \n2310432025 \nShift 2\n", 'white', 'on_red')
+
+baris = 6
+kolom = 8
+lebar = 80
+
+for i in range(baris):
+    cprint(" " * lebar, 'white', 'on_blue')
+
+cprint(" " * lebar, 'blue', 'on_white')
+
+def visa(baris, panjang):
+    kiri = (lebar - panjang) // 2
+    cprint(" " * kiri, 'blue', 'on_white', end="")
+    for x in baris:
+        if x != " " :
+            cprint(" ", 'blue', 'on_blue', end="")
+        else:
+            cprint(" ", 'blue', 'on_white', end="")
+    kanan = lebar - kiri - panjang
+    cprint(" " * kanan, 'blue', 'on_white')
+    print(end="")
+
+visa(" ______        ___       ______        ___             __             ", 70)
+visa("     ___      ___         __        __    __         _    _           ", 70)
+visa("      ___    ___         __          __             _      _          ", 70)
+visa("       __    __         __            __           __________         ", 70)
+visa("        __  __         __              __         _          _        ", 70)
+visa("         ____         __         __     __       _            _       ", 70)
+visa("          __        ______          ___         _              _      ", 70)
+
+cprint(" " * lebar, 'blue', 'on_white')
+
+for i in range(baris):
+    cprint(" " * lebar, 'white', 'on_yellow')
