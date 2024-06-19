@@ -1,0 +1,219 @@
+import os
+import time
+from termcolor import colored, cprint
+
+def bersihkan_layar():
+    os.system('cls')
+
+def tampilkan_menu_awal(menu):
+    cprint("="*52, 'cyan', 'on_blue')
+    cprint(f"|| {'No':<5} || {'Menu':<20} || {'Harga':<13} ||", 'black', 'on_blue')
+    cprint("="*52, 'cyan', 'on_blue')
+    for i, item in enumerate(menu):
+        cprint(f"|| {i+1:<5} || {item[0]:<20} || Rp {item[1]:<10} ||", 'black', 'on_white')
+    cprint("="*52, 'cyan', 'on_blue')
+    print()
+
+def ambil_pesanan(menu):
+    pesanan = []
+    while True:
+        pilihan = input("Masukkan nomor makanan atau minuman yang ingin dipesan (atau 'end' untuk menyelesaikan): ")
+        
+        if pilihan.lower() == 'end':
+            break
+        
+        if not pilihan.isdigit() or int(pilihan) < 1 or int(pilihan) > len(menu):
+            cprint("Pilihan tidak valid, silakan coba lagi.", 'red')
+            continue
+
+        indeks = int(pilihan) - 1
+        
+        while True:
+            jumlah = input("Masukkan jumlah: ")
+            if not jumlah.isdigit() or int(jumlah) < 1:
+                cprint("Jumlah tidak valid, silakan coba lagi.", 'red')
+            else:
+                pesanan.append((menu[indeks][0], int(jumlah), menu[indeks][1] * int(jumlah)))
+                break
+    return pesanan
+
+def tampilkan_pesanan(pesanan, alamat):
+    bersihkan_layar()
+    print(f"Nama     : {nama}")
+    print(f"No HP/WA : {no_hp}")
+    print(f"Alamat   : {alamat}")
+    cprint("Pesanan Anda : ", 'cyan')
+    cprint("="*66, 'cyan', 'on_blue')
+    cprint(f"|| {'No':<5} || {'Menu':<20} || {'Banyak':<10} || {'Harga':<13} ||", 'black', 'on_blue')
+    cprint("="*66, 'cyan', 'on_blue')
+    total = 0
+    for i, item in enumerate(pesanan):
+        menu, banyak, harga = item
+        cprint(f"|| {i+1:<5} || {menu:<20} || {banyak:<10} || Rp {harga:<10} ||", 'black', 'on_white')
+        total += harga
+    cprint("="*66, 'cyan', 'on_blue')
+    cprint(f"|| {'Total':<43} || Rp {total:<10} ||", 'black', 'on_yellow')
+    cprint("="*66, 'cyan', 'on_blue')
+    
+    while True:
+        cprint("Pilih metode pembayaran:", 'cyan')
+        cprint("1. QRIS", 'cyan')
+        cprint("2. Cash on Delivery (COD)", 'cyan')
+        pilihan = input("Masukkan pilihan Anda: ")
+        
+        if pilihan == '1':
+            tampilkan_qris()
+            break
+        elif pilihan == '2':
+            cprint("Anda memilih pembayaran Cash On delivery (COD).", 'green')
+            break
+        else:
+            cprint("Pilihan tidak valid, silakan coba lagi.", 'red')
+    
+    input("Tekan Enter untuk melanjutkan...")
+
+def tampilkan_qris():
+    qr_code = [
+        "█████  █  █████",
+        "█   █ █ █   █  ",
+        "█ █████ ███  ██",
+        "█ █  █   █ █ ██",
+        "██  ██ ██████ █",
+        "█  █  █ █  █ ██",
+        "███████   █  ██",
+    ]
+    cprint("Silakan scan QR Code berikut untuk pembayaran melalui QRIS:", 'cyan')
+    for line in qr_code:
+        cprint(line, 'white', 'on_black')
+
+def simpan_pesanan(pesanan, alamat, nama_berkas):
+    timestamp = time.strftime("%Y-%m-%d-%H:%M")
+    with open(nama_berkas, 'a') as berkas:
+        berkas.write(f"{username},{nama},{no_hp},{alamat}\n")
+        berkas.write(f"Pada tanggal {timestamp} yaitu : \n")
+        for item in pesanan:
+            berkas.write(f"{item[0]} - {item[1]} porsi - Rp {item[2]}\n")
+        total = sum(item[2] for item in pesanan)
+        berkas.write(f"Total: Rp {total}\n")
+        berkas.write("="*30 + "\n")
+        berkas.write("======\n")
+
+def buat_akun():
+    global nama, username, password, alamat, no_hp
+    nama = input("Masukkan nama Anda     : ")
+    username = input("Masukkan username Anda : ")
+    password = input("Masukkan password Anda : ")
+    alamat = input("Masukkan alamat Anda   : ")
+    no_hp = input("Masukkan no hp/wa Anda : ")
+    with open('akun3.txt', 'a') as f:
+        f.write(f"{nama},{username},{password},{alamat},{no_hp}\n")
+    cprint("Akun berhasil dibuat! Silakan login.", 'green')
+    time.sleep(2)
+
+def masuk_akun():
+    global nama, username, alamat, no_hp
+    username = input("Masukkan username Anda : ")
+    password = input("Masukkan password Anda : ")
+    with open('akun3.txt', 'r') as f:
+        for line in f:
+            stored_nama, stored_username, stored_password, stored_alamat, stored_no_hp = line.strip().split(',')
+            if username == stored_username and password == stored_password:
+                nama = stored_nama
+                alamat = stored_alamat
+                no_hp = stored_no_hp
+                cprint("Login berhasil!", 'green')
+                time.sleep(2)
+                return True
+    cprint("Username atau password salah, silakan coba lagi.", 'red')
+    time.sleep(2)
+    return False
+
+def lihat_riwayat_pesanan(nama_berkas):
+    bersihkan_layar()
+    cprint("Riwayat Pemesanan:", 'cyan')
+    with open(nama_berkas, 'r') as f:
+        lines = f.readlines()
+        riwayat = []
+        i = 0
+        while i < len(lines):
+            line = lines[i]
+            if line.startswith(username):
+                riwayat.append(lines[i:i+1])
+                i += 1
+                while i < len(lines) and not lines[i].startswith('======'):
+                    riwayat.append(lines[i:i+1])
+                    i += 1
+                if i < len(lines):
+                    riwayat.append(lines[i:i+1])
+                    i += 1 
+            else:
+                i += 1 
+        if riwayat:
+            for entry in riwayat:
+                print(''.join(entry).strip())
+        else:
+            print("Belum ada riwayat pemesanan.")
+    input("Tekan Enter untuk kembali ke menu utama...")
+
+menu = [
+    ["Nasi Goreng", 20000],
+    ["Mie Goreng", 15000],
+    ["Ayam Bakar", 25000],
+    ["Sate Ayam", 20000],
+    ["Soto Ayam", 18000],
+    ["Es Teh", 5000],
+    ["Es Jeruk", 7000],
+    ["Kopi", 10000],
+    ["Jus Alpukat", 15000],
+    ["Air Mineral", 3000]
+]
+
+kamus_pesanan = {}
+
+while True:
+    bersihkan_layar()
+    cprint("-- Selamat Datang di Layanan Pemesanan Makanan --", 'black', 'on_white')
+    print()
+    cprint("1. Buat Akun" , 'cyan')
+    cprint("2. Masuk Akun", 'cyan')
+    pilihan1 = input("Masukkan pilihan Anda: ")
+
+    if pilihan1 == '1':
+        buat_akun()
+    elif pilihan1 == '2':
+        if masuk_akun():
+            break
+    else:
+        cprint("Pilihan tidak valid, silakan coba lagi.", 'red')
+        time.sleep(2)
+
+while True:
+    bersihkan_layar()
+    cprint("Selamat Datang di Layanan Pemesanan Makanan", 'cyan')
+    print("1. Pesan Makanan/Minuman")
+    print("2. Riwayat Pemesanan")
+    print("3. Keluar")
+    pilihan2 = input("Masukkan pilihan Anda: ")
+    
+    if pilihan2 == '1':
+        while True:
+            bersihkan_layar()
+            tampilkan_menu_awal(menu)
+            pesanan = ambil_pesanan(menu)
+            if pesanan:
+                simpan_pesanan(pesanan, alamat, 'tinonabil4.txt')
+                tampilkan_pesanan(pesanan, alamat)
+                break 
+    
+    elif pilihan2 == '2':
+        lihat_riwayat_pesanan('tinonabil4.txt')
+    
+    elif pilihan2 == '3':
+        print()
+        cprint("-- Terimakasih telah berkunjung --" , 'black' , 'on_white')
+        print()
+        break
+    
+    else:
+        cprint("Pilihan tidak valid, silakan coba lagi.", 'red')
+        time.sleep(2)
